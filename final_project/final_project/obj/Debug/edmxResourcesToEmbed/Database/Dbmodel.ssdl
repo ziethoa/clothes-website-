@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FinalProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AboutUs">
+    <Key>
+      <PropertyRef Name="IDAboutUs" />
+    </Key>
+    <Property Name="IDAboutUs" Type="int" Nullable="false" />
+    <Property Name="NameAboutUs" Type="nvarchar" MaxLength="100" />
+    <Property Name="ImgAboutUS" Type="nchar" MaxLength="100" />
+    <Property Name="ShortDes" Type="nvarchar" MaxLength="100" />
+    <Property Name="FullDes" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="IDAccount" />
+    </Key>
+    <Property Name="IDAccount" Type="int" Nullable="false" />
+    <Property Name="AccountName" Type="nchar" MaxLength="100" />
+    <Property Name="Password" Type="nchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Country" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="150" />
+    <Property Name="Town_City" Type="nvarchar" MaxLength="100" />
+    <Property Name="Postcode_ZIP" Type="nvarchar" MaxLength="150" />
+    <Property Name="Phone" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="IDBrand" />
+    </Key>
+    <Property Name="IDBrand" Type="int" Nullable="false" />
+    <Property Name="NameBrand" Type="nvarchar" MaxLength="100" />
+    <Property Name="IDProduct" Type="int" />
+    <Property Name="Title" Type="bit" />
+  </EntityType>
+  <EntityType Name="Categogy">
+    <Key>
+      <PropertyRef Name="IDCategogy" />
+    </Key>
+    <Property Name="IDCategogy" Type="int" Nullable="false" />
+    <Property Name="NameCategogy" Type="nvarchar" MaxLength="100" />
+    <Property Name="IDProduct" Type="int" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="IDContact" />
+    </Key>
+    <Property Name="IDContact" Type="int" Nullable="false" />
+    <Property Name="IDAccount" Type="int" />
+    <Property Name="PhoneContact" Type="nchar" MaxLength="15" />
+    <Property Name="AddressContact" Type="nvarchar" MaxLength="150" />
+    <Property Name="Message" Type="nvarchar" MaxLength="500" />
+    <Property Name="LinkGoogleMap" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="IDDiscount" />
+    </Key>
+    <Property Name="IDDiscount" Type="int" Nullable="false" />
+    <Property Name="DiscountCode" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Home">
+    <Key>
+      <PropertyRef Name="IDHome" />
+    </Key>
+    <Property Name="IDHome" Type="int" Nullable="false" />
+    <Property Name="Topic" Type="nvarchar" MaxLength="100" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" />
+    <Property Name="ImgProduct" Type="nchar" MaxLength="100" />
+    <Property Name="ShortDes" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+    </Key>
+    <Property Name="IDProduct" Type="int" Nullable="false" />
+    <Property Name="NameProduct" Type="nvarchar" MaxLength="100" />
+    <Property Name="ImgProduct" Type="nchar" MaxLength="100" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Color" Type="nvarchar" MaxLength="20" />
+    <Property Name="Size" Type="nchar" MaxLength="10" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Rating" Type="nchar" MaxLength="10" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsNew" Type="bit" />
+    <Property Name="IsBestSaller" Type="bit" />
+  </EntityType>
+  <EntityType Name="ShoppingCart">
+    <Key>
+      <PropertyRef Name="IDShoppingCart" />
+    </Key>
+    <Property Name="IDShoppingCart" Type="int" Nullable="false" />
+    <Property Name="IDProduct" Type="int" />
+    <Property Name="PriceTotal" Type="float" />
+    <Property Name="Total" Type="float" />
+    <Property Name="IDDiscount" Type="int" />
+  </EntityType>
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="IDSlider" />
+    </Key>
+    <Property Name="IDSlider" Type="int" Nullable="false" />
+    <Property Name="Topic" Type="nvarchar" MaxLength="100" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" />
+    <Property Name="ImgProduct" Type="nchar" MaxLength="100" />
+    <Property Name="ShortDes" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="IDAccount" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="IDAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Brand">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Brand" Type="Self.Brand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="Brand">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discount">
+    <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount">
+        <PropertyRef Name="IDDiscount" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="IDDiscount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKProduct">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Categogy" Type="Self.Categogy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="Categogy">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FinalProjectModelStoreContainer">
+    <EntitySet Name="AboutUs" EntityType="Self.AboutUs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categogy" EntityType="Self.Categogy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Home" EntityType="Self.Home" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account" Association="Self.FK_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Contact" EntitySet="Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Brand" Association="Self.FK_Brand">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Brand" EntitySet="Brand" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discount" Association="Self.FK_Discount">
+      <End Role="Discount" EntitySet="Discount" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+    </AssociationSet>
+    <AssociationSet Name="FKProduct" Association="Self.FKProduct">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Categogy" EntitySet="Categogy" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

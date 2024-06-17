@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="01d3904eabfa492e8753b126916616b7" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="FinalProjectModel.AboutU" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Account" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Categogy" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Contact" Width="1.5" PointX="8.625" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Discount" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Home" Width="1.5" PointX="4.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Product" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.ShoppingCart" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.sysdiagram" Width="1.5" PointX="6.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="FinalProjectModel.FK_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FKProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Discount" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FinalProjectModel.Brand" Width="1.5" PointX="3" PointY="10.375" />
+        <AssociationConnector Association="FinalProjectModel.FK_Brand" />
+        <EntityTypeShape EntityType="FinalProjectModel.Slider" Width="1.5" PointX="9.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

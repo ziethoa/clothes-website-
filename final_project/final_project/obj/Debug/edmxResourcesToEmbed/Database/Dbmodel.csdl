@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FinalProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AboutU">
+    <Key>
+      <PropertyRef Name="IDAboutUs" />
+    </Key>
+    <Property Name="IDAboutUs" Type="Int32" Nullable="false" />
+    <Property Name="NameAboutUs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ImgAboutUS" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="ShortDes" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FullDes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="IDAccount" />
+    </Key>
+    <Property Name="IDAccount" Type="Int32" Nullable="false" />
+    <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Town_City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Postcode_ZIP" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Contacts" Relationship="Self.FK_Account" FromRole="Account" ToRole="Contact" />
+  </EntityType>
+  <EntityType Name="Categogy">
+    <Key>
+      <PropertyRef Name="IDCategogy" />
+    </Key>
+    <Property Name="IDCategogy" Type="Int32" Nullable="false" />
+    <Property Name="NameCategogy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IDProduct" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FKProduct" FromRole="Categogy" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="IDContact" />
+    </Key>
+    <Property Name="IDContact" Type="Int32" Nullable="false" />
+    <Property Name="IDAccount" Type="Int32" />
+    <Property Name="PhoneContact" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="AddressContact" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LinkGoogleMap" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Account" FromRole="Contact" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="IDDiscount" />
+    </Key>
+    <Property Name="IDDiscount" Type="Int32" Nullable="false" />
+    <Property Name="DiscountCode" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ShoppingCarts" Relationship="Self.FK_Discount" FromRole="Discount" ToRole="ShoppingCart" />
+  </EntityType>
+  <EntityType Name="Home">
+    <Key>
+      <PropertyRef Name="IDHome" />
+    </Key>
+    <Property Name="IDHome" Type="Int32" Nullable="false" />
+    <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ImgProduct" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="ShortDes" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="IDProduct" />
+    </Key>
+    <Property Name="IDProduct" Type="Int32" Nullable="false" />
+    <Property Name="NameProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ImgProduct" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Rating" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Categogies" Relationship="Self.FKProduct" FromRole="Product" ToRole="Categogy" />
+    <NavigationProperty Name="ShoppingCarts" Relationship="Self.FK_Product" FromRole="Product" ToRole="ShoppingCart" />
+    <Property Name="IsNew" Type="Boolean" />
+    <Property Name="IsBestSaller" Type="Boolean" />
+    <NavigationProperty Name="Brands" Relationship="FinalProjectModel.FK_Brand" FromRole="Product" ToRole="Brand" />
+  </EntityType>
+  <EntityType Name="ShoppingCart">
+    <Key>
+      <PropertyRef Name="IDShoppingCart" />
+    </Key>
+    <Property Name="IDShoppingCart" Type="Int32" Nullable="false" />
+    <Property Name="IDProduct" Type="Int32" />
+    <Property Name="PriceTotal" Type="Double" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="IDDiscount" Type="Int32" />
+    <NavigationProperty Name="Discount" Relationship="Self.FK_Discount" FromRole="ShoppingCart" ToRole="Discount" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Product" FromRole="ShoppingCart" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="IDAccount" />
+      </Principal>
+      <Dependent Role="Contact">
+        <PropertyRef Name="IDAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKProduct">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Categogy" Type="Self.Categogy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="Categogy">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Discount">
+    <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount">
+        <PropertyRef Name="IDDiscount" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="IDDiscount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FinalProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AboutUs" EntityType="Self.AboutU" />
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Categogies" EntityType="Self.Categogy" />
+    <EntitySet Name="Contacts" EntityType="Self.Contact" />
+    <EntitySet Name="Discounts" EntityType="Self.Discount" />
+    <EntitySet Name="Homes" EntityType="Self.Home" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ShoppingCarts" EntityType="Self.ShoppingCart" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Account" Association="Self.FK_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Contact" EntitySet="Contacts" />
+    </AssociationSet>
+    <AssociationSet Name="FKProduct" Association="Self.FKProduct">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Categogy" EntitySet="Categogies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Discount" Association="Self.FK_Discount">
+      <End Role="Discount" EntitySet="Discounts" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+    </AssociationSet>
+    <EntitySet Name="Brands" EntityType="FinalProjectModel.Brand" />
+    <AssociationSet Name="FK_Brand" Association="FinalProjectModel.FK_Brand">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Brand" EntitySet="Brands" />
+    </AssociationSet>
+    <EntitySet Name="Sliders" EntityType="FinalProjectModel.Slider" />
+  </EntityContainer>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="IDBrand" />
+    </Key>
+    <Property Name="IDBrand" Type="Int32" Nullable="false" />
+    <Property Name="NameBrand" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IDProduct" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="FinalProjectModel.FK_Brand" FromRole="Brand" ToRole="Product" />
+    <Property Name="Title" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_Brand">
+    <End Type="FinalProjectModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="FinalProjectModel.Brand" Role="Brand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDProduct" />
+      </Principal>
+      <Dependent Role="Brand">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="IDSlider" />
+    </Key>
+    <Property Name="IDSlider" Type="Int32" Nullable="false" />
+    <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ImgProduct" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="ShortDes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>
